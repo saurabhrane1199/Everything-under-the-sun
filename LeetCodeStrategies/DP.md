@@ -61,6 +61,70 @@ return dp[target]
 
 ## Distinct Ways/Possible Ways
 
+### **Problem Statement**
+Given a target find a number of distinct ways to reach the target.
+
+### **Approach**
+Sum all possible ways to reach the current state.
+
+```python
+
+for (int i = 1; i <= target; ++i) {
+   for (int j = 0; j < ways.size(); ++j) {
+       if (ways[j] <= i) {
+           dp[i] += dp[i - ways[j]];
+       }
+   }
+}
+```
+
+## Merging Intervals
+
+### **Problem Statement**
+Given a set of numbers find an optimal solution for a problem considering the current number and the best you can get from the left and right sides.
+
+### Approach
+Find all optimal solutions for every interval and return the best possible answer.
+```bash
+dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
+```
+
+### Code Snippet
+
+- Top Down
+
+```python
+for (int k = i; k <= j; ++k) {
+    result = max(result, topDown(nums, i, k-1) + result[k] + topDown(nums, k+1, j));
+}
+return memo[/*state parameters*/] = result;
+```
+
+- Botton Up
+```python
+
+for(int l = 1; l<n; l++) {
+   for(int i = 0; i<n-l; i++) {
+       int j = i+l;
+       for(int k = i; k<j; k++) {
+           dp[i][j] = max(dp[i][j], dp[i][k] + result[k] + dp[k+1][j]);
+       }
+   }
+}
+ 
+return dp[0][n-1];
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
